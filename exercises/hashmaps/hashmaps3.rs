@@ -3,7 +3,7 @@
 // A list of scores (one per line) of a soccer match is given. Each line is of
 // the form : "<team_1_name>,<team_2_name>,<team_1_goals>,<team_2_goals>"
 // Example: England,France,4,2 (England scored 4 goals, France 2).
-
+//
 // You have to build a scores table containing the name of the team, goals the
 // team scored, and goals the team conceded. One approach to build the scores
 // table is to use a Hashmap. The solution is partially written to use a
@@ -18,6 +18,7 @@ use std::collections::HashMap;
 
 // A structure to store the goal details of a team.
 struct Team {
+    name: String, //初始化结构体
     goals_scored: u8,
     goals_conceded: u8,
 }
@@ -37,14 +38,13 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be the number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
-        let temp = scores.entry(team_1_name).or_insert(Team{goals_scored:0,goals_conceded:0});
-        temp.goals_scored += team_1_score;
-        temp.goals_conceded += team_2_score;
-        let temp1 = scores.entry(team_2_name).or_insert(Team{goals_scored:0,goals_conceded:0});
-        temp1.goals_scored += team_2_score;
-        temp1.goals_conceded += team_1_score;
-
-        
+        //类似hashmaps2，但是需要进行判断，1队进球同时也是2队的失分，因此需要两队同时操作
+        let g = scores.entry(team_1_name.to_string()).or_insert(Team{name:team_1_name,goals_scored:0,goals_conceded:0});
+        (*g).goals_scored = (*g).goals_scored + team_1_score;
+        (*g).goals_conceded = (*g).goals_conceded + team_2_score;
+        let f = scores.entry(team_2_name.to_string()).or_insert(Team{name:team_2_name,goals_scored:0,goals_conceded:0});
+        (*f).goals_scored = (*f).goals_scored + team_2_score;
+        (*f).goals_conceded = (*f).goals_conceded + team_1_score;
     }
     scores
 }

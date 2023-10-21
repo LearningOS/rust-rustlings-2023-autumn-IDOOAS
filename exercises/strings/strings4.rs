@@ -7,6 +7,8 @@
 //
 // No hints this time!
 
+
+
 fn string_slice(arg: &str) {
     println!("{}", arg);
 }
@@ -14,12 +16,12 @@ fn string(arg: String) {
     println!("{}", arg);
 }
 
-fn main() {
+fn main() {// 简单来说就算分辨是字符串还是指针
     string_slice("blue");
     string("red".to_string());
     string(String::from("hi"));
     string("rust is fun!".to_owned());
-    string("nice weather".into());
+    string_slice("nice weather".into());
     string(format!("Interpolation {}", "Station"));
     string_slice(&String::from("abc")[0..1]);
     string_slice("  hello there ".trim());

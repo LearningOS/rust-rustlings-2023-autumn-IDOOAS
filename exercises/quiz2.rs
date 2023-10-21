@@ -25,51 +25,41 @@ pub enum Command {
     Trim,
     Append(usize),
 }
-
+//跟着注释来就行，注意引用包的操作
 mod my_module {
     use super::Command;
-
     // TODO: Complete the function signature!
-    pub fn transformer(input: Vec<(String,Command)>) -> Vec<String> {
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
         // TODO: Complete the output declaration!
         let mut output: Vec<String> = vec![];
         for (string, command) in input.iter() {
             // TODO: Complete the function body. You can do it!
-            let up:usize = 10;
-            let tr:usize = 20;
-            let ling:usize = 0;
-            let mut op:usize = match command {
-                Command::Uppercase => up,
-                Command::Trim => tr,
-                Command::Append(size) => *size,
-            };
-            if op == up {
-                
-                output.push(string.to_uppercase().to_string());
-            }
-            else if op == tr {
-                
-                output.push(string.trim().to_string());
-            }
-            else{
-                let mut strr = String::new();
-                strr = string.to_string();
-                while op > ling {
-                    strr.push_str("bar");
-                    op -= 1;
+            match command {
+                Command::Uppercase => {
+                    output.push(string.to_uppercase());
                 }
-                output.push(strr);
+                Command::Trim => {
+                    output.push(string.trim().to_string());
+                }
+                Command::Append(usize) => {
+                    let mut ans = String::new();
+                    for i in 0..*usize {
+                        ans += &string.clone();
+                    }
+                    output.push(format!("{}bar", ans));
+                }
             }
-            
         }
         output
     }
 }
 
+
+
 #[cfg(test)]
 mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
-    use super::my_module::transformer;
+    use crate::my_module::transformer; // 导入模块
     use super::Command;
 
     #[test]

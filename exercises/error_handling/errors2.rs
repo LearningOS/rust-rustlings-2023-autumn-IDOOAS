@@ -18,28 +18,19 @@
 //
 // Execute `rustlings hint errors2` or use the `hint` watch subcommand for a
 // hint.
+//游戏中所有商品都是5token 以及1token的手续费，要求为输入数字或者非法数字，进行判断
+
 
 use std::num::ParseIntError;
 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
-    let mut ifd = true;
-    for c in item_quantity.chars() {
-        if c.is_alphabetic() {
-            ifd = false;
-            break;
-        }
-    }
-    if ifd == false {
-       // return Err(std::num::ParseIntError);
-    }
     let processing_fee = 1;
     let cost_per_item = 5;
-    let qty = item_quantity.parse::<i32>();
-    match qty {
-        Ok(i32) => Ok(qty.unwrap() * cost_per_item + processing_fee),
-        Err(ParseIntError) => Err(ParseIntError),
-    }
-    //Ok(qty * cost_per_item + processing_fee)
+    let qty = match item_quantity.parse::<i32>(){ // 模式匹配
+    Ok(quantity) => quantity,
+    Err(e) => return Err(e),
+    };
+    Ok(qty * cost_per_item + processing_fee)
 }
 
 #[cfg(test)]

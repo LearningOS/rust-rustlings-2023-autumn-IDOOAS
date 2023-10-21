@@ -5,14 +5,16 @@
 // Execute `rustlings hint structs1` or use the `hint` watch subcommand for a
 // hint.
 
+
+
 struct ColorClassicStruct {
     // TODO: Something goes here
-    red:i32,
-    green:i32,
-    blue:i32,
+    red: i32,//结构体的构造方式
+    green: i32,
+    blue: i32,
 }
-
-struct ColorTupleStruct(/* TODO: Something goes here */i32,i32,i32);
+//元组声明
+struct ColorTupleStruct(u8, u8, u8);
 
 #[derive(Debug)]
 struct UnitLikeStruct;
@@ -24,18 +26,22 @@ mod tests {
     #[test]
     fn classic_c_structs() {
         // TODO: Instantiate a classic c struct!
-        let green = ColorClassicStruct{red:0,green:255,blue:0};
-
+        // let green =
+        let green = ColorClassicStruct{ //结构体初始化
+            red : 0,
+            green :255,
+            blue : 0,
+        };
         assert_eq!(green.red, 0);
         assert_eq!(green.green, 255);
         assert_eq!(green.blue, 0);
     }
 
     #[test]
-    fn tuple_structs() {
+    fn tuple_structs() {//元组绑定
         // TODO: Instantiate a tuple struct!
-        let green = ColorTupleStruct(0,255,0);
-
+        // let green =
+        let green = ColorTupleStruct(0,255,0);//
         assert_eq!(green.0, 0);
         assert_eq!(green.1, 255);
         assert_eq!(green.2, 0);
@@ -44,7 +50,8 @@ mod tests {
     #[test]
     fn unit_structs() {
         // TODO: Instantiate a unit-like struct!
-        let unit_like_struct = UnitLikeStruct;
+        // let unit_like_struct =
+        let unit_like_struct = UnitLikeStruct;//实例化对象
         let message = format!("{:?}s are fun!", unit_like_struct);
 
         assert_eq!(message, "UnitLikeStructs are fun!");

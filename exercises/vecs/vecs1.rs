@@ -7,11 +7,13 @@
 //
 // Execute `rustlings hint vecs1` or use the `hint` watch subcommand for a hint.
 
+
+
 fn array_and_vec() -> ([i32; 4], Vec<i32>) {
     let a = [10, 20, 30, 40]; // a plain array
-    let v = vec![10, 20, 30, 40];
+    let v = vec![10,20,30,40];
     // TODO: declare your vector here with the macro for vectors
-
+    //声明一个Vector,和上面声明的数组相对应
     (a, v)
 }
 

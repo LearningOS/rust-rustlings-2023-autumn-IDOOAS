@@ -4,10 +4,12 @@
 //
 // Execute `rustlings hint enums3` or use the `hint` watch subcommand for a
 // hint.
-        
+
+
 enum Message {
     // TODO: implement the message variant types based on their usage below
-    ChangeColor(u8, u8, u8),
+    //初始属性
+    ChangeColor((u8, u8, u8)),
     Echo(String),
     Move(Point),
     Quit,
@@ -40,17 +42,21 @@ impl State {
         self.position = p;
     }
 
-    fn process(&mut self, message: Message) {
+    fn process(&mut self, message: Message) {//使用match函数
         // TODO: create a match expression to process the different message
         // variants
         // Remember: When passing a tuple as a function argument, you'll need
         // extra parentheses: fn function((t, u, p, l, e))
-        match message {
-            Message::ChangeColor(r,g,b) => self.change_color((r,g,b)),
-            Message::Echo(text) => self.echo(text),
-            Message::Move(P) => self.move_position(P),
-            Message::Quit => self.quit(),
-        }
+        match message{//match函数实现
+
+        Message::ChangeColor(t) => self.change_color(t),
+
+        Message::Echo(msg) => self.echo(msg),
+
+        Message::Move(point) => self.move_position(point),
+
+        Message::Quit => self.quit(),
+        };
     }
 }
 
@@ -66,10 +72,10 @@ mod tests {
             color: (0, 0, 0),
             message: "hello world".to_string(),
         };
-        state.process(Message::ChangeColor(255, 0, 255));
+        state.process(Message::ChangeColor((255, 0, 255)));//注意参数是元组
         state.process(Message::Echo(String::from("hello world")));
         state.process(Message::Move(Point { x: 10, y: 15 }));
-        state.process(Message::Quit);
+        state.process(Message:: Quit);
 
         assert_eq!(state.color, (255, 0, 255));
         assert_eq!(state.position.x, 10);

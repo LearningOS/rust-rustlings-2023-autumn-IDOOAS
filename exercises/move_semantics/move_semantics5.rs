@@ -6,8 +6,10 @@
 // Execute `rustlings hint move_semantics5` or use the `hint` watch subcommand
 // for a hint.
 
+
+
 fn main() {
-    let mut x = 100;
+    let mut x = 100;//可变应用只能同时出现一次，最后一次使用引用后自动删除，此时可以进行第二次引用
     let y = &mut x;
     *y += 100;
     let z = &mut x;

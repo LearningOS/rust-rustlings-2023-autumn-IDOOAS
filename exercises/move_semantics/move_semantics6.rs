@@ -5,6 +5,7 @@
 // Execute `rustlings hint move_semantics6` or use the `hint` watch subcommand
 // for a hint.
 
+
 fn main() {
     let data = "Rust is great!".to_string();
 
@@ -12,7 +13,7 @@ fn main() {
 
     string_uppercase(data);
 }
-
+//第一个函数不给权限，借用即可，第二个函数给权限，不借用，之间传递权限
 // Should not take ownership
 fn get_char(data: &String) -> char {
     data.chars().last().unwrap()
